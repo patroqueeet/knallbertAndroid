@@ -48,6 +48,17 @@ public class BodyDefFactory {
         return def;
     }
 
+    public static BodyDef createCircles(float x) {
+        // We give the circles the position that the user wants. Vertically it is always placed in
+        // 0.5 meters. Because the circles are 1 meter tall, and because the position is always
+        // given in terms of half-width and half-height, this will make the base of the circles
+
+        // be over the floor.
+        BodyDef def = new BodyDef();
+        def.position.set(x, 0.5f);
+        return def;
+    }
+
     public static BodyDef createFloor() {
         BodyDef def = new BodyDef();
         def.position.set(0, -1);

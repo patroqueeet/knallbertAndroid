@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -51,10 +52,10 @@ public class Box2DScreen extends es.danirod.jddprototype.game.BaseScreen {
     private OrthographicCamera camera;
 
     /** The bodies that we use in this example. */
-    private Body minijoeBody, floorBody, spikeBody;
+    private Body minijoeBody, floorBody, spikeBody, circleBody;
 
     /** The fixtures that we use in this example. */
-    private Fixture minijoeFixture, floorFixture, spikeFixture;
+    private Fixture minijoeFixture, floorFixture, spikeFixture, circleFixture;
 
     /** Some variables that could be encapsulated if this had been a better example. */
     private boolean mustJump, isJumping, isAlive = true;
@@ -76,18 +77,18 @@ public class Box2DScreen extends es.danirod.jddprototype.game.BaseScreen {
         minijoeBody = world.createBody(BodyDefFactory.createPlayer());
         floorBody = world.createBody(BodyDefFactory.createFloor());
         spikeBody = world.createBody(BodyDefFactory.createSpikes(6f));
-
+        circleBody= world.createBody(BodyDefFactory.createFloor());
         // Create the fixture for the entities in this world.
         minijoeFixture = FixtureFactory.createPlayerFixture(minijoeBody);
         floorFixture = FixtureFactory.createFloorFixture(floorBody);
         spikeFixture = FixtureFactory.createSpikeFixture(spikeBody);
-
+        circleFixture=FixtureFactory.createCircleFixture(circleBody);
         // Set the user data to some categories that will let us handle collisions in a more
         // generic way. Player can collide with floor and with spike.
         minijoeFixture.setUserData("player");
         floorFixture.setUserData("floor");
         spikeFixture.setUserData("spike");
-
+        circleFixture.setUserData("circle");
         // Set the contact listener for this world. The contact listener will handle contacts.
         world.setContactListener(new Box2DScreenContactListener());
     }
@@ -98,12 +99,12 @@ public class Box2DScreen extends es.danirod.jddprototype.game.BaseScreen {
         floorBody.destroyFixture(floorFixture);
         minijoeBody.destroyFixture(minijoeFixture);
         spikeBody.destroyFixture(spikeFixture);
-
+        circleBody.destroyFixture(circleFixture);
         // Destroy all the bodies from their world.
         world.destroyBody(minijoeBody);
         world.destroyBody(floorBody);
         world.destroyBody(spikeBody);
-
+        world.destroyBody(circleBody);
         // Dispose all the things.
         world.dispose();
         renderer.dispose();
@@ -180,6 +181,12 @@ public class Box2DScreen extends es.danirod.jddprototype.game.BaseScreen {
             if ((fixtureA.getUserData().equals("player") && fixtureB.getUserData().equals("spike")) ||
                     (fixtureA.getUserData().equals("spike") && fixtureB.getUserData().equals("player"))) {
                 // Spike and player have collided. Insta-death.
+                isAlive = false;
+            }
+
+            if ((fixtureA.getUserData().equals("player") && fixtureB.getUserData().equals("circle")) ||
+                    (fixtureA.getUserData().equals("circle") && fixtureB.getUserData().equals("player"))) {
+                // Circle and player have collided. Insta-death.
                 isAlive = false;
             }
         }

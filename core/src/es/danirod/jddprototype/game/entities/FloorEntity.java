@@ -87,6 +87,7 @@ public class FloorEntity extends Actor {
         leftBox.setAsBox(0.02f, 0.45f);
         leftFixture = leftBody.createFixture(leftBox, 1);
         leftFixture.setUserData("spike");
+        leftFixture.setUserData("circle");
         leftBox.dispose();
 
         // Now place the actor in the stage by converting the coordinates given in meters to px.

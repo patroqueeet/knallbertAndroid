@@ -20,6 +20,7 @@ package es.danirod.jddprototype.game.entities;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -73,6 +74,18 @@ public class EntityFactory {
     public SpikeEntity createSpikes(World world, float x, float y) {
         Texture spikeTexture = manager.get("spike.png");
         return new SpikeEntity(world, spikeTexture, x, y);
+    }
+
+    /**
+     * Create circles using the default texture.
+     * @param world     world where the circles will live in.
+     * @param x         horizontal position for the circles in the world (meters).
+     * @param y         vertical position for the base of the circles in the world (meters).
+     * @return          some circles.
+     */
+    public CircleEntity createCircles(World world, float x, float y) {
+        Texture circlesTexture = manager.get("circle.png");
+        return new CircleEntity(world, circlesTexture, x, y);
     }
 
 }

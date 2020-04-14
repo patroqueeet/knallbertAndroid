@@ -56,7 +56,7 @@ public class MainGame extends Game {
         manager.load("audio/die.ogg", Sound.class);
         manager.load("audio/jump.ogg", Sound.class);
         manager.load("audio/song.ogg", Music.class);
-
+        manager.load("circle.png", Texture.class);
         // Enter the loading screen to load the assets.
         loadingScreen = new LoadingScreen(this);
         setScreen(loadingScreen);

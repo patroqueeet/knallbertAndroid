@@ -59,4 +59,19 @@ public class FixtureFactory {
         shape.dispose();
         return fixture;
     }
+
+    public static Fixture createCircleFixture(Body pinchoBody) {
+        // This is the harder shape because it is not a box. I have to design the shape in
+        // terms of vertices. So I create a vertex array to give the shape all the vertices.
+        Vector2[] vertices = new Vector2[3];
+        vertices[0] = new Vector2(-0.5f, -0.5f);
+        vertices[1] = new Vector2(0.5f, -0.5f);
+        vertices[2] = new Vector2(0, 0.5f);
+
+        PolygonShape shape = new PolygonShape();
+        shape.set(vertices);
+        Fixture fixture = pinchoBody.createFixture(shape, 1);
+        shape.dispose();
+        return fixture;
+    }
 }

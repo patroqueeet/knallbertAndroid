@@ -22,6 +22,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -33,6 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import es.danirod.jddprototype.game.entities.CircleEntity;
 import es.danirod.jddprototype.game.entities.EntityFactory;
 import es.danirod.jddprototype.game.entities.FloorEntity;
 import es.danirod.jddprototype.game.entities.PlayerEntity;
@@ -60,6 +62,8 @@ public class GameScreen extends BaseScreen {
 
     /** List of spikes attached to this level. */
     private List<SpikeEntity> spikeList = new ArrayList<SpikeEntity>();
+
+    private List<CircleEntity> circleList = new ArrayList<CircleEntity>();
 
     /** Jump sound that has to play when the player jumps. */
     private Sound jumpSound;
@@ -122,11 +126,14 @@ public class GameScreen extends BaseScreen {
         spikeList.add(factory.createSpikes(world, 35, 2));
         spikeList.add(factory.createSpikes(world, 50, 1));
 
-        // All add the floors and spikes to the stage.
-        for (FloorEntity floor : floorList)
-            stage.addActor(floor);
-        for (SpikeEntity spike : spikeList)
-            stage.addActor(spike);
+        // Generate some spikes too.
+        circleList.add(factory.createCircles(world, 8, 1));
+        circleList.add(factory.createCircles(world, 23, 2));
+        circleList.add(factory.createCircles(world, 35, 2));
+        circleList.add(factory.createCircles(world, 50, 1));
+
+
+
 
         // Add the player to the stage too.
         stage.addActor(player);
@@ -159,10 +166,13 @@ public class GameScreen extends BaseScreen {
             floor.detach();
         for (SpikeEntity spike : spikeList)
             spike.detach();
+        for (CircleEntity circle : circleList)
+            circle.detach();
 
         // Clear the lists.
         floorList.clear();
         spikeList.clear();
+        circleList.clear();
     }
 
     /**

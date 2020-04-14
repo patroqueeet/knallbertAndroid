@@ -42,10 +42,10 @@ public class Scene2DScreen extends BaseScreen {
     private es.danirod.jddprototype.scene2d.SpikeActor spikes;
 
     /** Textures used in this screen. */
-    private Texture playerTexture, spikeTexture;
+    private Texture playerTexture, spikeTexture, circleTexture;
 
     /** Regions used in this screen. */
-    private TextureRegion spikeRegion;
+    private TextureRegion spikeRegion, circleRegion;
 
     public Scene2DScreen(MainGame game) {
         super(game);
@@ -54,6 +54,8 @@ public class Scene2DScreen extends BaseScreen {
         playerTexture = new Texture("player.png");
         spikeTexture = new Texture("spike.png");
         spikeRegion = new TextureRegion(spikeTexture, 0, 64, 128, 64);
+        circleTexture = new Texture("circle.png");
+        circleRegion = new TextureRegion(circleTexture, 0, 64, 128, 64);
     }
 
     @Override
