@@ -63,6 +63,7 @@ public class GameScreen extends BaseScreen {
     /** List of spikes attached to this level. */
     private List<SpikeEntity> spikeList = new ArrayList<SpikeEntity>();
 
+    /** List of circles attached to this level. */
     private List<CircleEntity> circleList = new ArrayList<CircleEntity>();
 
     /** Jump sound that has to play when the player jumps. */
@@ -132,8 +133,13 @@ public class GameScreen extends BaseScreen {
         circleList.add(factory.createCircles(world, 35, 2));
         circleList.add(factory.createCircles(world, 50, 1));
 
-
-
+        // All add the floors and spikes to the stage.
+        for (FloorEntity floor : floorList)
+            stage.addActor(floor);
+        for (SpikeEntity spike : spikeList)
+            stage.addActor(spike);
+        for (CircleEntity circle : circleList)
+            stage.addActor(circle);
 
         // Add the player to the stage too.
         stage.addActor(player);

@@ -23,7 +23,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -77,7 +76,7 @@ public class Box2DScreen extends es.danirod.jddprototype.game.BaseScreen {
         minijoeBody = world.createBody(BodyDefFactory.createPlayer());
         floorBody = world.createBody(BodyDefFactory.createFloor());
         spikeBody = world.createBody(BodyDefFactory.createSpikes(6f));
-        circleBody= world.createBody(BodyDefFactory.createFloor());
+        circleBody= world.createBody(BodyDefFactory.createCircles(6f));
         // Create the fixture for the entities in this world.
         minijoeFixture = FixtureFactory.createPlayerFixture(minijoeBody);
         floorFixture = FixtureFactory.createFloorFixture(floorBody);

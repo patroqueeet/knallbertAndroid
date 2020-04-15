@@ -25,7 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 /**
  * This actor represents the spikes used in the Scene2D screen.
  */
-public class  SpikeActor extends Actor {
+public class SpikeActor extends Actor {
 
     /** Texture for the spikes. */
     private TextureRegion spikes;
